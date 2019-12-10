@@ -8,18 +8,21 @@ class PigLatinizer
   end
 
   # piglatinizes an individual word (FAILED - 2)
-  def self.piglatinize_word(word)
+  def piglatinize_word(word)
     case word.chr
-    
-    # case for vowels
-    when /[aeiou]/
+      
+      # case for vowels
+    when /[aeiouAEIOU]/
       word + "way"
-    
-    # case for non vowels
+      
+      # case for non vowels
     else
       arr = word.split("")
-      until arr.first == /[aeiou]/
+      counter = 1
+      until (/[aeiouAEIOU]/.match?(arr.first) || counter == arr.length)
+        # binding.pry
         arr << arr.shift  
+        counter += 1
       end
       arr.join + "ay"
       # first_vowel_index = word.index(/[aeiou]/)
@@ -27,17 +30,18 @@ class PigLatinizer
   end
 
   # has a method splits the sentence to piglatinize each word (FAILED - 3)
-  def piglatinize
+  def piglatinize(text)
+    @text = text
     # split sentence into array of words
     words = @text.split
     # run piglatinize_word on each
     pig_words = words.map do |word|
-      word.piglatinize
+      piglatinize_word(word)
     end
+    # binding.pry
     pig_words.join(' ')
   end
   
-  test = piglatinize_word("James")
-  binding.pry
+ 
 
 end

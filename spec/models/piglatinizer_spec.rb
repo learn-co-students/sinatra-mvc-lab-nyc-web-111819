@@ -7,6 +7,7 @@ describe 'class PigLatinizer' do
   end
 
   it 'piglatinizes an individual word' do
+    # binding.pry
     expect(words.piglatinize("pork")).to eq("orkpay")
     expect(words.piglatinize("I")).to eq("Iway")
     expect(words.piglatinize("hello")).to eq("ellohay")
